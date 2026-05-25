@@ -1,4 +1,4 @@
-# Decisions — How We Resolved Ambiguities
+# Decisions — How We Resolved  issues
 
 ## 1. SAP Integration Format
 

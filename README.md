@@ -92,7 +92,6 @@ Upload CSVs from `sample_data/` on the **Ingest Data** page. See [sample_data/RE
 | Document | Description |
 |----------|-------------|
 | [MODEL.md](./MODEL.md) | Data model, multi-tenancy, audit trail |
-| [DECISIONS.md](./DECISIONS.md) | Ambiguities resolved and format choices |
 
 ---
 
