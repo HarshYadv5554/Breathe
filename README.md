@@ -1,73 +1,118 @@
-# Breathe ESG — Data Ingestion & Analyst Review Prototype
+# Breathe ESG
 
-Django REST + React app for ingesting SAP, utility, and corporate travel data; normalizing to GHG-scoped activity rows; and analyst review before audit lock.
+Prototype for ingesting enterprise emissions data from SAP, utility portals, and corporate travel exports — normalizing it to GHG-scoped activity rows and supporting analyst review before audit lock.
 
-## Live deployment
+**Live app:** https://breathe-esg-2e35.onrender.com  
+**Repository:** https://github.com/HarshYadv5554/Breathe
 
-**Live app:** https://breathe-esg-2e35.onrender.com
+| | |
+|---|---|
+| Username | `analyst` |
+| Password | `breathe2026` |
 
-| Item | Link |
-|------|------|
-| GitHub | https://github.com/HarshYadv5554/Breathe |
-| Render service | https://dashboard.render.com/web/srv-d8a3llbtqb8s7391t4vg |
-| Render Postgres | https://dashboard.render.com/d/dpg-d8a2ra67r5hc73e1cggg-a |
+---
 
-**Demo credentials:** `analyst` / `breathe2026`
+## Overview
 
-> **Note:** Link `breathe-db` to the web service in Render (Environment → Link Database) for persistent Postgres. Until then, the app uses SQLite on the instance (resets on redeploy).
+Breathe ESG addresses the onboarding problem: every client’s data lives in a different system, shape, and quality level. This app:
+
+1. **Ingests** CSV exports from three source types (SAP MM, utility portal, Concur-style travel)
+2. **Normalizes** rows to Scope 1/2/3 with unit conversion and suspicion flags
+3. **Surfaces** a review dashboard where analysts approve, reject, or lock rows for audit
+
+Carbon calculation (tCO₂e) is intentionally out of scope — the focus is ingestion, normalization, and review workflow.
+
+---
+
+## Features
+
+- Multi-tenant data model (`Organization` boundary)
+- Source-specific parsers with realistic column aliases (EN/DE SAP headers)
+- Raw record preservation + normalized `EmissionActivity` rows
+- Review states: pending → flagged → approved → locked
+- Append-only audit trail for analyst actions
+
+---
+
+## Project structure
+
+```
+Breathe/
+├── backend/          # Django 5 + DRF API
+│   ├── core/         # Models, review API, auth
+│   └── ingest/       # CSV parsers + ingestion pipeline
+├── frontend/         # React + Vite analyst UI
+├── sample_data/      # Test CSV files for each source
+├── MODEL.md          # Data model documentation
+├── DECISIONS.md      # Design decisions
+├── TRADEOFFS.md      # Deliberate omissions
+└── SOURCES.md        # Source research & sample data rationale
+```
+
+---
 
 ## Local development
 
+**Backend**
+
 ```bash
-# Backend
 cd backend
 python -m venv .venv
-.venv\Scripts\activate   # Windows
+source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py seed_demo
 python manage.py runserver
+```
 
-# Frontend (separate terminal)
+**Frontend** (separate terminal)
+
+```bash
 cd frontend
 npm install
 npm run dev
 ```
 
-Frontend: http://localhost:5173 (proxies `/api` to Django)
+Open http://localhost:5173 — the dev server proxies `/api` to Django on port 8000.
 
-## Production build
-
-```bash
-bash build.sh
-cd backend && gunicorn breathe_api.wsgi:application
-```
+---
 
 ## Sample data
 
-Upload files from `/sample_data`:
+Upload CSVs from `sample_data/` on the **Ingest Data** page. See [sample_data/README.md](./sample_data/README.md) for which file matches each data source.
 
-- `sap_mm_export.csv` — SAP MM fuel & procurement
-- `utility_portal_export.csv` — utility portal electricity
-- `concur_travel_export.csv` — Concur-style travel expenses
+| Source | File |
+|--------|------|
+| SAP MM — Fuel & Procurement | `sap_mm_export.csv` |
+| Utility Portal — Electricity | `utility_portal_export.csv` |
+| Concur — Business Travel | `concur_travel_export.csv` |
 
-## Documentation (assignment deliverables)
+---
 
-- [MODEL.md](./MODEL.md) — data model rationale
-- [DECISIONS.md](./DECISIONS.md) — ambiguities resolved
-- [TRADEOFFS.md](./TRADEOFFS.md) — what we didn't build
-- [SOURCES.md](./SOURCES.md) — source research & sample data
+## Documentation
 
-## API overview
+| Document | Description |
+|----------|-------------|
+| [MODEL.md](./MODEL.md) | Data model, multi-tenancy, audit trail |
+| [DECISIONS.md](./DECISIONS.md) | Ambiguities resolved and format choices |
+| [TRADEOFFS.md](./TRADEOFFS.md) | What we deliberately did not build |
+| [SOURCES.md](./SOURCES.md) | Real-world source research and sample data design |
 
-- `POST /api/auth/login/`
-- `GET /api/orgs/{id}/dashboard/`
-- `POST /api/orgs/{id}/sources/{source_id}/upload/` (multipart file)
-- `GET /api/orgs/{id}/activities/?status=flagged`
-- `POST /api/orgs/{id}/activities/{id}/approve|reject|lock/`
+---
 
 ## Tech stack
 
-- Django 5 + DRF + Token auth
-- React 18 + Vite + TypeScript
-- SQLite (local) / PostgreSQL (Render)
+- **Backend:** Django 5, Django REST Framework, Token authentication
+- **Frontend:** React 18, TypeScript, Vite
+- **Database:** SQLite (local), PostgreSQL (production via Render)
+
+---
+
+## Deployment
+
+Deployed on [Render](https://render.com) using `render.yaml`. Production build:
+
+```bash
+./build.sh
+cd backend && gunicorn breathe_api.wsgi:application --bind 0.0.0.0:$PORT
+```
