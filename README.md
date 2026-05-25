@@ -4,32 +4,17 @@ Django REST + React app for ingesting SAP, utility, and corporate travel data; n
 
 ## Live deployment
 
-| Item | Status |
-|------|--------|
-| Render Postgres `breathe-db` | Created — [dashboard](https://dashboard.render.com/d/dpg-d8a2ra67r5hc73e1cggg-a) |
-| Render Web Service | **Pending** — push code to GitHub first (see below) |
-| Live URL | _Will be `https://breathe-esg.onrender.com` (or similar) after deploy_ |
+**Live app:** https://breathe-esg-2e35.onrender.com
 
-### Finish deploy (2 steps)
-
-**1. GitHub** — In a terminal, complete login if prompted, then push:
-
-```powershell
-gh auth login -h github.com -p https -w
-cd c:\Users\91729\Desktop\Breathe
-.\scripts\finish-deploy.ps1
-```
-
-Or create https://github.com/new named `Breathe-ESG`, then:
-
-```powershell
-git remote set-url origin https://github.com/HarshYadv5554/Breathe-ESG.git
-git push -u origin main
-```
-
-**2. Render** — [New Blueprint](https://dashboard.render.com/blueprints) → connect `Breathe-ESG` → uses `render.yaml` (web + DB).
+| Item | Link |
+|------|------|
+| GitHub | https://github.com/HarshYadv5554/Breathe |
+| Render service | https://dashboard.render.com/web/srv-d8a3llbtqb8s7391t4vg |
+| Render Postgres | https://dashboard.render.com/d/dpg-d8a2ra67r5hc73e1cggg-a |
 
 **Demo credentials:** `analyst` / `breathe2026`
+
+> **Note:** Link `breathe-db` to the web service in Render (Environment → Link Database) for persistent Postgres. Until then, the app uses SQLite on the instance (resets on redeploy).
 
 ## Local development
 
