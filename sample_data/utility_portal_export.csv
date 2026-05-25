@@ -1,0 +1,6 @@
+Account Number,Meter Number,Service Address,Period Start,Period End,Consumption,Unit,Rate Schedule,Total Charges
+ACC-77821,MTR-00142,"100 Industrial Pkwy, Chicago IL",2025-01-17,2025-02-16,145230,kWh,GS-1 General Service,18234.50
+ACC-77821,MTR-00142,"100 Industrial Pkwy, Chicago IL",2025-02-17,2025-03-16,138900,kWh,GS-1 General Service,17402.10
+ACC-99201,MTR-00401,"Frankfurt Manufacturing, DE",2025-01-01,2025-01-31,89200,kWh,Industrie HT,11240.00
+ACC-99201,MTR-00401,"Frankfurt Manufacturing, DE",2025-03-05,2025-04-04,95400,kWh,Industrie HT,12105.80
+ACC-44550,MTR-00999,"Singapore Hub",2025-02-01,2025-02-28,42100,kWh,Commercial C1,5890.00

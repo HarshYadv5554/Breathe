@@ -1,0 +1,7 @@
+Report ID,Employee Name,Transaction Date,Expense Type,Merchant,Amount,Currency,Origin Airport Code,Destination Airport Code,Distance,Distance Unit
+RPT-2025-00142,Jane Smith,2025-03-05,Airfare,United Airlines,1245.00,USD,JFK,LHR,,
+RPT-2025-00143,John Doe,2025-03-12,Hotel,Marriott Downtown,890.00,USD,,,,
+RPT-2025-00144,John Doe,2025-03-14,Ground Transport,Uber,45.50,USD,,,,
+RPT-2025-00145,Priya Patel,2025-03-20,Airfare,Air India,520.00,USD,DEL,BOM,,
+RPT-2025-00146,Mike Chen,2025-03-22,Personal Car Mileage,IRS Rate,0,USD,,,120,mi
+RPT-2025-00147,Sarah Lee,2025-04-01,Airfare,Delta,680.00,USD,SFO,ORD,2960,km

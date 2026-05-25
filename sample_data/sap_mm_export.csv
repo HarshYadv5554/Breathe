@@ -1,0 +1,7 @@
+Material Document;Posting Date;Plant;Material;Description;Quantity;Unit;Amount;Currency;Vendor;Movement Type
+4900123456;15.03.2025;1000;MAT-FUEL-001;Diesel fuel - fleet vehicles;1250,50;L;1875,75;EUR;Shell Deutschland GmbH;201
+4900123457;18.03.2025;2000;MAT-FUEL-002;Gasoline - company cars;890,00;GAL;2450,00;USD;BP America Inc;201
+4900123458;22.03.2025;3000;MAT-PROC-100;Office supplies procurement;500;KG;12000,00;USD;Staples Asia;101
+4900123459;25.03.2025;1000;MAT-FUEL-003;Heating oil - boiler;3200;L;4480,00;EUR;Total Energies;261
+4900123460;28.03.2025;9999;MAT-FUEL-004;Unknown plant diesel;200;L;300,00;EUR;Local Supplier;201
+4900123461;01.04.2025;2000;MAT-PROC-200;IT equipment purchase;15;EA;45000,00;USD;Dell Technologies;101
