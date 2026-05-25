@@ -44,9 +44,7 @@ Breathe/
 ├── frontend/         # React + Vite analyst UI
 ├── sample_data/      # Test CSV files for each source
 ├── MODEL.md          # Data model documentation
-├── DECISIONS.md      # Design decisions
-├── TRADEOFFS.md      # Deliberate omissions
-└── SOURCES.md        # Source research & sample data rationale
+└── DECISIONS.md      # Design decisions
 ```
 
 ---
@@ -95,8 +93,6 @@ Upload CSVs from `sample_data/` on the **Ingest Data** page. See [sample_data/RE
 |----------|-------------|
 | [MODEL.md](./MODEL.md) | Data model, multi-tenancy, audit trail |
 | [DECISIONS.md](./DECISIONS.md) | Ambiguities resolved and format choices |
-| [TRADEOFFS.md](./TRADEOFFS.md) | What we deliberately did not build |
-| [SOURCES.md](./SOURCES.md) | Real-world source research and sample data design |
 
 ---
 
